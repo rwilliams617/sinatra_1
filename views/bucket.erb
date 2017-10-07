@@ -1,0 +1,12 @@
+
+<% @id.each do |bucket| %>
+
+<form method="GET" action="/buckets/:id">
+	
+	<h2><%= bucket.name %></h2>
+
+	<p><%= bucket.description %></p>
+
+	<img id="bucket_img_<%= bucket.id %>" src="<%= bucket.url %>" alt="<%= bucket.name %>">
+
+<% end %>

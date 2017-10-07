@@ -1,0 +1,29 @@
+<h2>Bucket List</h2>
+
+<ol>
+  <% @buckets.each do |bucket| %>
+  <li><a href="/buckets/<%= bucket.id %>"><%= bucket.name %></a></li>
+  <% end %>
+</ol> 
+
+<form method="POST" action="/buckets">
+	<fieldset>
+  	<label for="item_name">Add Bucket List Item</label>
+  	<input type="text" name="item_name" id="item_name">
+  </fieldset>
+
+  <fieldset>
+  	<label for="item_url">Item URL</label>
+  	<input type="text" name="item_url" id="item_url">
+  </fieldset>
+
+  <fieldset>
+    <label for="item_description">Add Bucket List Description</label>
+    <input type="text" name="item_description" id="item_description">
+  </fieldset>
+
+  <fieldset>
+    <label for="submit"></label>
+    <input type="submit" value="submit" name="submit" id="submit">
+  </fieldset>
+</form>

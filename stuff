@@ -1,0 +1,60 @@
+index
+<% @bucket.each do |bucket| %>
+
+def write_yaml
+	File.open("data.yml", "w") do |file|
+	file.write(Psych.dump("data.yml"))
+end
+
+# @@buckets = [
+# 	{id: 1, name: "Career Change", img: "https://d3c5s1hmka2e2b.cloudfront.net/uploads/topic/image/188/WEGOTCODERS_color.jpg", 
+# 	description: "I'm half machine. I'm a monster. No! I was ashamed to be SEEN with you. I like being with you. That's why 
+# 	you always leave a note! I care deeply for nature. Oh, you're gonna be in a coma, all right. We just call it a sausage. t's called 'taking advantage. ' It's what gets you ahead in life. No! I was ashamed to be SEEN with you. I like being with you. First place chick is hot, but has an attitude, doesn't date magicians. No, I did not kill Kitty.  However, I am going to oblige and answer the nice officer's questions because I am an honest man with no secrets to hide."},
+
+# 	{id: 2, name: "Move Overseas", img: "/images/move.jpg", 
+# 	description: "Manchester, England"},
+
+# 	{id: 3, name: "Learn Ruby", img: "/images/learn-ruby.png", 
+# 	description: "Lots of wine, prayer, and revision!"},
+
+# 	{id:4, name: "Dynamic Ruby", img: "images/frank.jpeg", description: "great stuff"}
+# ]
+
+get "/" do
+	@bucket = {}
+	erb :index, :layout => :"layouts/main"	
+end
+
+get "/buckets/:name" do
+	name = params[:name]
+	buckets = Repo.load_yaml
+	@bucket = buckets.select{ |b| b.name == name }.pop
+	erb :bucket, :layout => :"layouts/main"
+end
+
+
+post "/buckets" do
+	name = params[:item_name] 
+  description = params[:item_description] 
+  url = params[:item_url]
+  @bucket = Bucket.new(name: name, url: url, description: description)
+  # n = @bucket.last[:name] + 1
+  buckets = Repo.load_yaml
+  buckets.push(@bucket)
+  erb :index, :layout => :"layouts/main"
+end
+
+class Repo
+	def self.load_yaml
+		unless File.exists?("data.yml")
+			File.open("data.yml", "w+")
+		end
+		YAML.load_file("data.yml")
+	end
+
+	def self.set_yaml(buckets)
+		File.open("data.yml", "r+") do |file|
+			file.write(Bucket.new.to_yaml)
+		end
+	end
+end

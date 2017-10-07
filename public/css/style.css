@@ -1,0 +1,45 @@
+body {
+	background-color: lightgrey;
+}
+
+h1, p, h2 {
+	font-family: 'Gloria Hallelujah', cursive;
+}
+
+h1 {
+	margin: 20px 0 20px 20px;
+	font-size: 3rem;
+	color: red;
+}
+
+h2 {
+	font-size: 2rem;
+	margin: 15px 0 15px 20px;
+}
+
+p {
+	text-align: justify;
+	margin: 0px 50px 25px 20px;
+}
+
+footer {
+	margin-top: 100px;
+}
+
+img {
+	margin-left: 20px;
+	margin-top: 25px;
+	/*margin-bottom: 225px;*/
+}
+
+#bucket_img_1 {
+	width: 700px;
+}
+
+#bucket_img_3 {
+	width: 800px;
+	height: 500px;
+}
+
+
+
